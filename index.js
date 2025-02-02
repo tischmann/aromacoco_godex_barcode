@@ -220,7 +220,7 @@ const labelPrinter = (function () {
         </svg>`;
                 deleteButton.addEventListener('click', deleteSequenceItem);
                 deleteButton.addEventListener('touchstart', deleteSequenceItem);
-                deleteButton.setAttribute('data-key', key);
+                deleteButton.setAttribute('data-barcode', value.barcode);
                 sequenceItem.append(deleteButton);
 
                 const title = document.createElement('div');
@@ -232,7 +232,7 @@ const labelPrinter = (function () {
                 minus.innerHTML = `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"viewBox="0 0 409.6 409.6" xml:space="preserve"><path d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z"/></svg>`;
                 minus.addEventListener('click', minusItemHandler);
                 minus.addEventListener('touchstart', minusItemHandler);
-                minus.setAttribute('data-key', key);
+                minus.setAttribute('data-barcode', value.barcode);
                 sequenceItem.append(minus);
 
                 const count = document.createElement('div');
@@ -245,7 +245,7 @@ const labelPrinter = (function () {
                 plus.innerHTML = `<svg viewBox="0 0 426.66667 426.66667" xmlns="http://www.w3.org/2000/svg"><path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"/></svg>`;
                 plus.addEventListener('click', plusItemHandler);
                 plus.addEventListener('touchstart', plusItemHandler);
-                plus.setAttribute('data-key', key);
+                plus.setAttribute('data-barcode', value.barcode);
                 sequenceItem.append(plus);
                 resolve(sequenceItem);
             });
@@ -346,17 +346,24 @@ const labelPrinter = (function () {
         event.preventDefault();
         event.stopPropagation();
 
-        let count = sequence.get(this.dataset.key);
+        const barcode = this.dataset.barcode;
+     
+        let obj = sequence.get(barcode)
 
-        if (--count) {
-            sequence.set(this.dataset.key, count);
-            this.parentNode.querySelectorAll('.count').forEach(element => {
-                element.innerHTML = count;
-            });
-        } else {
-            sequence.delete(this.dataset.key);
+        obj.count--;
+
+        if (obj.count == 0) {
+            sequence.delete(barcode);
             this.parentNode.remove();
+            countSequenceItems();
+            return false;
+        } else {
+            sequence.set(barcode, obj);
         }
+
+        this.parentNode.querySelectorAll('.count').forEach(element => {
+            element.innerHTML = obj.count;
+        });
 
         countSequenceItems();
     }
@@ -365,11 +372,16 @@ const labelPrinter = (function () {
         event.preventDefault();
         event.stopPropagation();
 
-        let count = sequence.get(this.dataset.key);
-        sequence.set(this.dataset.key, ++count);
+        const barcode = this.dataset.barcode;
+
+        let obj = sequence.get(barcode)
+
+        obj.count++;
+
+        sequence.set(barcode, obj);
 
         this.parentNode.querySelectorAll('.count').forEach(element => {
-            element.innerHTML = count;
+            element.innerHTML = obj.count;
         });
 
         countSequenceItems();
