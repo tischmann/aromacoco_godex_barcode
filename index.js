@@ -312,7 +312,7 @@ const labelPrinter = (function () {
 
             let top = 12;
 
-            commands += `^Q15,2${CR}`
+            commands += `^Q15,3${CR}`
                 + `^W30${CR}`
                 + `^H19${CR}` // Brightness - 1...19
                 + `^P${i++}${CR}`
