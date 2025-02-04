@@ -293,8 +293,8 @@ const labelPrinter = (function () {
         for (const [key, value] of sequence.entries()) {
             const length = value.code.length;
 
-            if (value.barcode.length != 12) {
-                alert('Bad barcode (length must be 12): ' + value.barcode);
+            if (value.barcode.length != 13) {
+                alert('Bad barcode (length must be 13): ' + value.barcode);
                 return false;
             }
 

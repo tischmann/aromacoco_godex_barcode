@@ -10,7 +10,7 @@ const content = {
                 {
                     title: "Moschino Funny  Delux W",
                     code: "W17 DELUX",
-                    barcode: "123456789012"
+                    barcode: "1234567890128"
 				}
             ]
         },
@@ -22,7 +22,7 @@ const content = {
                 {
                     title: "Chanel Bleu de Chanel Delux M",
                     code: "M17 DELUX",
-                    barcode: "123456789013"
+                    barcode: "2234567890127"
                 }                         
             ]
         },
@@ -34,7 +34,7 @@ const content = {
                 {
                     title: "Sheikh Al Shuyukh (UAE) Delux U",
                     code: "U17 DELUX",
-                    barcode: "123456789014"
+                    barcode: "2234567890127"
 				}
             ]
         },
@@ -46,7 +46,7 @@ const content = {
 				{
                     title: "Apelsin Lux",
                     code: "X17 LUX",
-                    barcode: "123456789015"
+                    barcode: "2234567890127"
                 }
 			]
 		},
@@ -58,7 +58,7 @@ const content = {
 				{
                     title: "Эссенция Водорастворимый Lanvin Eclat d'Arpege W",
                     code: "E17",
-                    barcode: "123456789016"
+                    barcode: "2234567890127"
                 }
 			]
         }
