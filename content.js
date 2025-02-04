@@ -11,7 +11,7 @@ const content = {
                     title: "Moschino Funny  Delux W",
                     category: "d",
                     code: "W17 DELUX",
-                    barcode: "812345678912"
+                    barcode: "1234561234567"
 				}
             ]
         },
@@ -24,7 +24,7 @@ const content = {
                     title: "Chanel Bleu de Chanel Delux M",
                     category: "d",
                     code: "M17 DELUX",
-                    barcode: "812345678913"
+                    barcode: "1234561234568"
                 }                         
             ]
         },
@@ -37,7 +37,7 @@ const content = {
                     title: "Sheikh Al Shuyukh (UAE) Delux U",
                     category: "d",
                     code: "U17 DELUX",
-                    barcode: "812345678914"
+                    barcode: "1234561234569"
 				}
             ]
         },
@@ -50,7 +50,7 @@ const content = {
                     title: "Apelsin Lux",
                     category: "l",
                     code: "X17 LUX",
-                    barcode: "812345678915"
+                    barcode: "1234561234565"
                 }
 			]
 		},
@@ -63,7 +63,7 @@ const content = {
                     title: "Эссенция Водорастворимый Lanvin Eclat d'Arpege W",
                     category: "s",
                     code: "E17",
-                    barcode: "812345678916"
+                    barcode: "1234561234564"
                 }
 			]
         }
