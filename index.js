@@ -274,11 +274,9 @@ const labelPrinter = (function () {
 
         cpj.clientPrinter = new JSPM.DefaultPrinter();
 
-        //cpj.clientPrinter = new JSPM.InstalledPrinter($('#installedPrinterName').val());
-
         const CR = "\x0D";
-        let commands = '';
 
+        let commands = '';
 
         const wrap = function (text, width = 13) {
             return text.replace(
@@ -295,8 +293,8 @@ const labelPrinter = (function () {
         for (const [key, value] of sequence.entries()) {
             const length = value.code.length;
 
-            if (value.barcode.length != 13) {
-                alert('Bad barcode (length must be 13): ' + value.barcode);
+            if (value.barcode.length != 12) {
+                alert('Bad barcode (length must be 12): ' + value.barcode);
                 return false;
             }
 
@@ -328,12 +326,12 @@ const labelPrinter = (function () {
                 + `^L${CR}`
                 + `Dy2-me-dd${CR}`
                 + `Th:m:s${CR}`
-                + `BE,14,50,2,6,32,0,1,${value.barcode}`
+                + `Dy2-me-dd${CR}`
+                + `Th:m:s${CR}`
+                + `BE,12,49,2,6,32,0,1,${value.barcode}${CR}`
                 + `AI,${margin(value.code)},${top},1,1,0,0E,${value.code}${CR}`
                 + `E${CR}`;
         }
-
-        // console.log(`COMMAND:`, commands)
 
         cpj.printerCommands = commands;
         cpj.sendToClient();
