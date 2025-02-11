@@ -6,7 +6,7 @@ const JSPM_PORT = 27443;
 
 const LANGUAGE = 'ru';
 
-const DPI_300 = false; // 300 dpi, else 200 dpi
+const DPI_300 = true; // 300 dpi, else 200 dpi
 
 const MULTIPLIER = DPI_300 ? 12 : 8;
 
