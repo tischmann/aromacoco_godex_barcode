@@ -4,6 +4,12 @@ const JSPM_HOST = 'localhost';
 
 const JSPM_PORT = 27443;
 
+const LANGUAGE = 'ru';
+
+const DPI_300 = false; // 300 dpi, else 200 dpi
+
+const MULTIPLIER = DPI_300 ? 12 : 8;
+
 const labelPrinter = (function () {
     const sequence = new Map();
     const lang = {
@@ -12,6 +18,12 @@ const labelPrinter = (function () {
             sequence: 'ОЧЕРЕДЬ',
             clear: 'ОЧИСТИТЬ',
             print: 'ПЕЧАТЬ'
+        },
+        en: {
+            empty: 'EMPTY',
+            sequence: 'SEQUENCE',
+            clear: 'CLEAR',
+            print: 'PRINT'
         }
     };
     const fn = {};
@@ -48,7 +60,7 @@ const labelPrinter = (function () {
                     'hidden'
                 );
                 itemsWrapper.setAttribute('data-type', content.categories[key].type);
-                itemsWrapper.innerHTML = lang.ru.empty;
+                itemsWrapper.innerHTML = lang[LANGUAGE].empty;
 
                 const category = document.createElement('div');
                 category.classList.add(
@@ -96,7 +108,7 @@ const labelPrinter = (function () {
 
 
         sequenceWrapper.classList.add('category', 'sequence-wrapper');
-        sequenceWrapper.innerHTML = `${lang.ru.sequence}:0`;
+        sequenceWrapper.innerHTML = `${lang[LANGUAGE].sequence}:0`;
         sequenceWrapper.setAttribute('data-type', 'sequence');
         sequenceWrapper.addEventListener('click', categoryClickHandler);
         sequenceWrapper.addEventListener('touchstart', categoryClickHandler);
@@ -148,10 +160,10 @@ const labelPrinter = (function () {
             total += value.count;
         }
 
-        sequenceWrapper.innerHTML = `${lang.ru.sequence}:${total}`;
+        sequenceWrapper.innerHTML = `${lang[LANGUAGE].sequence}:${total}`;
 
         if (!sequence.size) {
-            sequenceItemsWrapper.innerHTML = lang.ru.empty;
+            sequenceItemsWrapper.innerHTML = lang[LANGUAGE].empty;
             sequenceItemsWrapper.style.height = sequenceItemsWrapper.dataset.height;
         }
     }
@@ -183,7 +195,7 @@ const labelPrinter = (function () {
     }
 
     function renderSequence() {
-        sequenceItemsWrapper.innerHTML = lang.ru.empty;
+        sequenceItemsWrapper.innerHTML = lang[LANGUAGE].empty;
 
         if (sequence.size) {
             sequenceItemsWrapper.setAttribute('data-height', sequenceItemsWrapper.style.height);
@@ -192,7 +204,7 @@ const labelPrinter = (function () {
 
             const clear = document.createElement('div');
             clear.classList.add('item', 'clear');
-            clear.innerHTML = lang.ru.clear;
+            clear.innerHTML = lang[LANGUAGE].clear;
             clear.addEventListener('click', clearSequenceHandler);
             clear.addEventListener('touchstart', clearSequenceHandler);
             sequenceItemsWrapper.append(clear);
@@ -201,7 +213,7 @@ const labelPrinter = (function () {
             print.classList.add('item', 'print');
             print.addEventListener('click', printSequenceHandler);
             print.addEventListener('touchstart', printSequenceHandler);
-            print.innerHTML = lang.ru.print;
+            print.innerHTML = lang[LANGUAGE].print;
             sequenceItemsWrapper.append(print);
         }
 
@@ -308,7 +320,15 @@ const labelPrinter = (function () {
                 return false;
             }
 
-            let top = 12;
+            let top = Math.round(1.5 * MULTIPLIER);
+
+            const BARCODE = DPI_300 
+            ? `BE,22,90,3,6,32,0,1,${value.barcode}${CR}`
+            : `BE,12,49,2,6,32,0,1,${value.barcode}${CR}`;
+
+            const TEXT = DPI_300
+            ? `AJ,${margin(value.code)},${top},2,2,0,0,${value.code}${CR}`
+            : `AI,${margin(value.code)},${top},1,1,0,0,${value.code}${CR}`;
 
             commands += `^Q15,3${CR}`
                 + `^W30${CR}`
@@ -326,12 +346,12 @@ const labelPrinter = (function () {
                 + `^L${CR}`
                 + `Dy2-me-dd${CR}`
                 + `Th:m:s${CR}`
-                + `Dy2-me-dd${CR}`
-                + `Th:m:s${CR}`
-                + `BE,12,49,2,6,32,0,1,${value.barcode}${CR}`
-                + `AI,${margin(value.code)},${top},1,1,0,0E,${value.code}${CR}`
+                + BARCODE
+                + TEXT
                 + `E${CR}`;
         }
+
+        console.log(commands);
 
         cpj.printerCommands = commands;
         cpj.sendToClient();
