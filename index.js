@@ -4,7 +4,7 @@ const JSPM_HOST = 'localhost';
 
 const JSPM_PORT = 27443;
 
-const LANGUAGE = 'ru';
+const LANGUAGE = 'en';
 
 const DPI_300 = true; // 300 dpi, else 200 dpi
 
