@@ -10,6 +10,8 @@ const DPI_300 = true; // 300 dpi, else 200 dpi
 
 const MULTIPLIER = DPI_300 ? 12 : 8;
 
+const DEBUG = false;
+
 const labelPrinter = (function () {
     const sequence = new Map();
     const lang = {
@@ -351,7 +353,7 @@ const labelPrinter = (function () {
                 + `E${CR}`;
         }
 
-        console.log(commands);
+        if (DEBUG) console.log(commands);
 
         cpj.printerCommands = commands;
         cpj.sendToClient();
