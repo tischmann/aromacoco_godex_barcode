@@ -305,6 +305,8 @@ const labelPrinter = (function () {
         for (const [key, value] of sequence.entries()) {
             const length = value.code.length;
 
+	    const count = value.count || 1;
+
             if (value.barcode.length != 13) {
                 alert('Bad barcode (length must be 13): ' + value.barcode);
                 return false;
@@ -333,7 +335,7 @@ const labelPrinter = (function () {
             commands += `^Q15,3${CR}`
                 + `^W30${CR}`
                 + `^H19${CR}` // Brightness - 1...19
-                + `^P1${CR}`
+                + `^P${count}${CR}`
                 + `^S4${CR}`
                 + `^AT${CR}` // Print type: AT - termo transfer, AD - direct
                 + `^C1${CR}`
