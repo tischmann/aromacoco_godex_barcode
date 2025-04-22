@@ -4,9 +4,9 @@ const JSPM_HOST = 'localhost';
 
 const JSPM_PORT = 27443;
 
-const LANGUAGE = 'en';
+const LANGUAGE = 'ru';
 
-const DPI_300 = true; // 300 dpi, else 200 dpi
+const DPI_300 = false; // 300 dpi, else 200 dpi
 
 const MULTIPLIER = DPI_300 ? 12 : 8;
 
@@ -302,8 +302,6 @@ const labelPrinter = (function () {
             return 16 + ((13 - text.length) * 8);
         }
 
-        let i = 1
-
         for (const [key, value] of sequence.entries()) {
             const length = value.code.length;
 
@@ -335,7 +333,7 @@ const labelPrinter = (function () {
             commands += `^Q15,3${CR}`
                 + `^W30${CR}`
                 + `^H19${CR}` // Brightness - 1...19
-                + `^P${i++}${CR}`
+                + `^P1${CR}`
                 + `^S4${CR}`
                 + `^AT${CR}` // Print type: AT - termo transfer, AD - direct
                 + `^C1${CR}`
