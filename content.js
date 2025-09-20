@@ -8,10 +8,11 @@ const content = {
             default: true,
             data: [
                 {
-                    title: "Moschino Funny  Delux W",
+                    title: "Maison francis kurkdjian baccarat rouge 540",
+                    text: "Maison francis kurkdjian baccarat rouge 540 (U4L)",
                     code: "W17 DELUX",
                     barcode: "1234567890128"
-				}
+                }
             ]
         },
         {
@@ -21,9 +22,10 @@ const content = {
             data: [
                 {
                     title: "Chanel Bleu de Chanel Delux M",
+                    text: "Chanel Bleu de Chanel Delux M",
                     code: "M17 DELUX",
                     barcode: "2234567890127"
-                }                         
+                }
             ]
         },
         {
@@ -33,9 +35,10 @@ const content = {
             data: [
                 {
                     title: "Sheikh Al Shuyukh (UAE) Delux U",
+                    text: "Sheikh Al Shuyukh (UAE) Delux U",
                     code: "U17 DELUX",
                     barcode: "2234567890127"
-				}
+                }
             ]
         },
         {
@@ -43,24 +46,26 @@ const content = {
             type: "mono",
             default: false,
             data: [
-				{
+                {
                     title: "Apelsin Lux",
+                    text: "Apelsin Lux",
                     code: "X17 LUX",
                     barcode: "2234567890127"
                 }
-			]
-		},
-		{
-		    title: "ЭВ",
+            ]
+        },
+        {
+            title: "ЭВ",
             type: "e",
             default: false,
             data: [
-				{
+                {
                     title: "Эссенция Водорастворимый Lanvin Eclat d'Arpege W",
+                    text: "Эссенция Водорастворимый Lanvin Eclat d'Arpege W",
                     code: "E17",
                     barcode: "2234567890127"
                 }
-			]
+            ]
         }
     ]
 };
