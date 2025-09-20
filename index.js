@@ -4,13 +4,15 @@ const JSPM_HOST = "localhost";
 
 const JSPM_PORT = 27443;
 
-const LANGUAGE = "en";
+const LANGUAGE = 'ru';
 
 const DPI_300 = false; // 300 dpi, else 200 dpi
 
 const MULTIPLIER = DPI_300 ? 12 : 8;
 
 const TEXT_ONLY = true; // Print text only, without barcode
+
+const DEBUG = false;
 
 const labelPrinter = (function () {
     const CR = "\x0D";
@@ -338,6 +340,8 @@ const labelPrinter = (function () {
         for (const [key, value] of sequence.entries()) {
             const length = value.code.length;
 
+            const count = value.count || 1;
+
             if (value.barcode.length != 13) {
                 alert("Bad barcode (length must be 13): " + value.barcode);
                 return false;
@@ -383,7 +387,7 @@ const labelPrinter = (function () {
                 `E${CR}`;
         }
 
-        console.log(commands);
+        if (DEBUG) console.log(commands);
 
         cpj.printerCommands = commands;
         cpj.sendToClient();
