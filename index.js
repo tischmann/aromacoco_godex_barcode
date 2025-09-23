@@ -424,7 +424,7 @@ const labelPrinter = (function () {
         }
 
         // Add each line to the print commands
-        let textTop = DPI_300 ? 2 : 2;
+        let textTop = DPI_300 ? 4 : 4;
 
         let textStep = DPI_300 ? 29 : 29;
 
