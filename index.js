@@ -2,7 +2,7 @@
 
 const JSPM_HOST = "localhost";
 
-const JSPM_PORT = 27443;
+const JSPM_PORT = 28443;
 
 const LANGUAGE = 'ru';
 
@@ -91,8 +91,9 @@ const labelPrinter = (function () {
                         const item = document.createElement("div");
                         item.classList.add("item");
                         item.dataset.title = content.categories[key].data[itemKey].title;
-                        item.dataset.text = content.categories[key].data[itemKey].text;
+                        item.dataset.text = content.categories[key].data[itemKey].text || content.categories[key].data[itemKey].title;
                         item.dataset.code = content.categories[key].data[itemKey].code;
+                        if (item.dataset.code) item.dataset.text += ` (${item.dataset.code})`
                         item.dataset.barcode =
                             content.categories[key].data[itemKey].barcode;
                         item.innerHTML = content.categories[key].data[itemKey].title;
@@ -302,7 +303,7 @@ const labelPrinter = (function () {
     }
 
     function centerLineMargin(text, lineLength = 15) {
-        const LEFT = DPI_300 ? 16 : 2;
+        const LEFT = DPI_300 ? 16 : 4;
         if (DPI_300) lineLength = 22;
         let WIDTH = DPI_300 ? 300 : 200;
         let LETTER_WIDTH = Math.round(WIDTH / lineLength);
@@ -396,7 +397,7 @@ const labelPrinter = (function () {
         renderSequence();
     }
 
-    function createMultipleLines(text, maxLength = 15) {
+    function createMultipleLines(text, maxLength = 14) {
         let commands = "";
 
         if (DPI_300) maxLength = 22;
