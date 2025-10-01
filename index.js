@@ -336,8 +336,6 @@ const labelPrinter = (function () {
                 .split("\n");
         };
 
-        let i = 1;
-
         for (const [key, value] of sequence.entries()) {
             const length = value.code.length;
 
@@ -370,7 +368,7 @@ const labelPrinter = (function () {
                 `^Q15,3${CR}` +
                 `^W30${CR}` +
                 `^H19${CR}` + // Brightness - 1...19
-                `^P${i++}${CR}` +
+                `^P${count}${CR}` +
                 `^S4${CR}` +
                 `^AT${CR}` + // Print type: AT - termo transfer, AD - direct
                 `^C1${CR}` +
